@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="selectPhonesByPage" resultType="Phone">
-		SELECT * FROM phone limit 4 offset #{page}
+		SELECT * FROM phone limit 3 offset #{page}
 	</select>
 	
 	<select id="selectPhonesByManufacture" resultType="Phone">

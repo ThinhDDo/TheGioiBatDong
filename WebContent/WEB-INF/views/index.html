@@ -56,16 +56,16 @@
 				
 				
 
-				<th:block th:if="${profile.username}==null">
+				<th:block th:if="${#authorization.expression('!isAuthenticated()')}">
 					<i class="fa fa-user m-1" aria-hidden="true"></i>
-					<a href="#">Login</a>
+					<a href="#" th:href="@{/login}">Login</a>
 				</th:block>
 
-				<th:block th:if="${profile.username}!=null">
+				<th:block th:if="${#authorization.expression('isAuthenticated()')}">
 					<div class="dropdown">
-						<a data-toggle="dropdown" th:text="${profile.fullname}"></a>
+						<a data-toggle="dropdown" th:text="${#authentication.name}"></a>
 						<div class="dropdown-menu">
-						<a class="dropdown-item active" th:href="@{/profile(user=${profile.username})}">Your Profile</a>
+						<a class="dropdown-item active" th:href="@{/profile(user=${#authentication.name})}">Your Profile</a>
 						<a class="dropdown-item" th:href="@{/login(logout=true)}">Logout</a>
 						</div>
 					</div>
@@ -163,13 +163,17 @@
 					</a>
 					
 					<th:block th:if="${brands} != null">
-						<a href="#" th:each="brand : ${brands}">
-							<img src="img/menu-brands/Samsung42.jpg" th:src="@{/img/menu-brands/{brandimg}(brandimg=${brand.image})}" th:alt="${brand.image}">
-						</a>
+						<th:block th:each="brand : ${brands}">
+							<a th:href="@{/filter(mid=${brand.manufacturer_id})}">
+								<img src="img/menu-brands/Samsung42.jpg" th:src="@{/img/menu-brands/{brandimg}(brandimg=${brand.image})}" th:alt="${brand.image}">
+							</a>	
+						</th:block>
 					</th:block>
 				</div>
 			</div>
 
+
+			<!-- PRODUCTS LIST -->
 			<div class="col-md-9">
 				<div class="content">
 
@@ -183,79 +187,102 @@
 						</form>
 					</div>
 					
+					<style>
+						div.product {
+							padding: 0;
+							width: 25rem;
+						}
+
+						div.card-header{
+							background-color: white;
+							border-bottom: none;
+							min-height: 50px;
+							overflow-y: hidden;
+							padding: 0;
+						}
+
+						div.my-card-footer {
+							display: inline-block;
+							padding: 0;
+						}
+
+						div.my-card-body {
+							padding-left: 0;
+							padding-right: 0;
+							
+						}
+
+						img.my-card-img {
+							height: 250px;
+						}
+						
+						b#price {
+							color: red;
+						}
+					</style>
+
 					<th:block th:if="${phones} != null">
 						<div class="row mt-3">
-							<div class="col-md-6" th:each="phone : ${phones}">
-								<div class="card" style="width: 18rem;">
-									<img class="card-img-top" th:src="@{/img/products/{phoneimg}(phoneimg=${phone.image})}" src="img/samsung.jpg" th:alt="${phone.image}">
-									<div class="card-body">
-									  <h5 class="card-title" th:text="${phone.name}">Card title</h5>
+							<div class="product col-md-3 mt-3" th:each="phone : ${phones}">
+								<div class="card h-100" style="width: 18rem;">
+									<img class="card-img-top my-card-img" th:src="@{/img/products/{phoneimg}(phoneimg=${phone.image})}" src="img/samsung.jpg" th:alt="${phone.image}">
+									<div class="card-header">
+										<h5 class="card-title" th:text="${phone.name}">Card title</h5>
+									</div>
+									<div class="card-body my-card-body h-100">
+									  <div th:with="pprice=${phone.price}">
+									  	<b id="price" th:text="${#numbers.formatDecimal(pprice, 3, 'COMMA', 0, 'POINT')} + ' VND'">000.000.000 VND</b>
+									  </div>
+									  
 									  <p class="card-text" th:text="${phone.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									  <a href="#" class="btn btn-primary">Details</a>
+									</div>
+									<div class="card-body my-card-footer">
+										<a href="#" class="btn">Details</a>
+										<a href="#" class="btn btn-warning">Buy Now</a>
 									</div>
 								</div>
 							</div>
 						</div>
+						
 					</th:block>
-<!-- 					<div class="row mt-3"> -->
-						
-<!-- 						<div class="col-md-6"> -->
-<!-- 							<div class="card" style="width: 18rem;"> -->
-<!-- 								<img class="card-img-top" src="img/samsung.jpg" alt="Card image cap"> -->
-<!-- 								<div class="card-body"> -->
-<!-- 								  <h5 class="card-title">Card title</h5> -->
-<!-- 								  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-<!-- 								  <a href="#" class="btn btn-primary">Details</a> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-
-<!-- 						<div class="col-md-6"> -->
-<!-- 							<div class="card" style="width: 18rem;"> -->
-<!-- 								<img class="card-img-top" src="img/samsung.jpg" alt="Card image cap"> -->
-<!-- 								<div class="card-body"> -->
-<!-- 								  <h5 class="card-title">Card title</h5> -->
-<!-- 								  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-<!-- 								  <a href="#" class="btn btn-primary">Details</a> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-
-<!-- 					<div class="row mt-3"> -->
-<!-- 						<div class="col-md-6"> -->
-<!-- 							<div class="card" style="width: 18rem;"> -->
-<!-- 								<img class="card-img-top" src="img/samsung.jpg" alt="Card image cap"> -->
-<!-- 								<div class="card-body"> -->
-<!-- 								  <h5 class="card-title">Card title</h5> -->
-<!-- 								  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-<!-- 								  <a href="#" class="btn btn-primary">Details</a> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-						
-<!-- 						<div class="col-md-6"> -->
-<!-- 							<div class="card" style="width: 18rem;"> -->
-<!-- 								<img class="card-img-top" src="img/samsung.jpg" alt="Card image cap"> -->
-<!-- 								<div class="card-body"> -->
-<!-- 								  <h5 class="card-title">Card title</h5> -->
-<!-- 								  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-<!-- 								  <a href="#" class="btn btn-primary">Details</a> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
 
 					<!-- Page Navigation -->
-					<nav aria-label="...">
-					  <ul class="pagination pagination-sm">
-					    <li class="page-item disabled">
-					      <a class="page-link" href="#" tabindex="-1">1</a>
-					    </li>
-					    <li class="page-item"><a class="page-link" href="#">2</a></li>
-					    <li class="page-item"><a class="page-link" href="#">3</a></li>
-					  </ul>
-					</nav>
+					<th:block th:if="${#lists.size(phones) % 3} == 0">
+						<div th:with="numberPages=${#lists.size(phones) / 3}">
+							<nav class="d-flex justify-content-center mt-3">
+								<ul class="pagination pagination-sm">
+									<th:block th:each="index : ${#numbers.sequence(1, numberPages, 1)}">
+										<li class="page-item" id="page">
+											<a id="page" class="page-link" href="#" th:text="${index}">-1</a>
+										</li>
+									</th:block>
+									
+								</ul>
+							</nav>
+						</div>
+						
+					</th:block>
+
+					<th:block th:if="${#lists.size(phones) % 3} != 0">
+						<div th:with="numberPages=${#lists.size(phones) / 3} + 1">
+							<nav class="d-flex justify-content-center mt-3">
+								<ul class="pagination pagination-sm">
+									<th:block th:each="index : ${#numbers.sequence(1, numberPages, 1)}">
+										<li class="page-item" id="page">
+											<a class="page-link" href="#" th:text="${index}">-1</a>
+										</li>
+									</th:block>
+								</ul>
+							</nav>
+						</div>						
+					</th:block>
+					
+					<script>
+						document.getElementById("page").addEventListener("click", function(){
+							console.log("OK")
+						});
+					</script>
+					
 				</div>
 			</div>
 		</div>

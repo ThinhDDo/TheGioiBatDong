@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.19, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.20, for Win64 (x86_64)
 --
 -- Host: localhost    Database: store
 -- ------------------------------------------------------
--- Server version	8.0.19
+-- Server version	8.0.20
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -140,7 +140,7 @@ CREATE TABLE `phone` (
   CONSTRAINT `phone_ibfk_1` FOREIGN KEY (`manufacturer_id`) REFERENCES `manufacturer` (`manufacturer_id`),
   CONSTRAINT `phone_ibfk_2` FOREIGN KEY (`discount_id`) REFERENCES `discount` (`discount_id`),
   CONSTRAINT `phone_ibfk_3` FOREIGN KEY (`discount_id`) REFERENCES `discount` (`discount_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +149,7 @@ CREATE TABLE `phone` (
 
 LOCK TABLES `phone` WRITE;
 /*!40000 ALTER TABLE `phone` DISABLE KEYS */;
-INSERT INTO `phone` VALUES (13,'Xiaomi Redmi 9 (4GB/64GB)',10,3999000,'Màn hình 6.53, Camera sau Chính 13 MP & Phụ 8 MP, 5 MP, 2 MP, Pin 5020 mAh',4,'xiaomi-redmi-9-(10).jpg','',NULL),(14,'Samsung Galaxy A31',10,5840000,'Super AMOLED, 6.4, 	Android 10, Full HD+, Chính 48 MP & Phụ 8 MP, 5 MP, 5 MP, Camera sau 20MP',1,'samsung-galaxy-a21s-055620-045627-400x460.png','',NULL),(15,'Phone SE 256GB 2020',10,17490000,'	IPS LCD, 4.7\", Retina, iOS 13, 	12 MP, 	Apple A13 Bionic 6 nhân, 3GB/256GB',2,'iphone-7-gold-400x460.png','',NULL),(16,'Vivo V19',10,8590000,'Super AMOLED, 6.4, Android 10, Full HD+, Chính 48 MP & Phụ 8 MP, 5 MP, 5 MP, Camera sau 20MP, 8 GB/128GB',3,'vivo-y30-xanh-400x460-400x460.png','',NULL),(17,'OPPO A92',10,6490000,'	TFT LCD, 6.5\", Full HD+, Android 10, Chính 48 MP & Phụ 8 MP, 2 MP, 2 MP, Snapdragon 665 8 nhân, 8 GB/128GB',5,'oppo-a92-tim-400x460-400x460.png','',NULL),(18,'Vsmart Star 4',10,2190000,'IPS LCD, 6.09, Android 10, Chính 8 MP & Phụ 5 MP, MediaTek Helio P35 8 nhân, 2 GB/32GB',6,'vsmart-star-4-den-400x460-400x460.png','',NULL);
+INSERT INTO `phone` VALUES (13,'Xiaomi Redmi 9 (4GB/64GB)',10,3999000,'Màn hình 6.53, Camera sau Chính 13 MP & Phụ 8 MP, 5 MP, 2 MP, Pin 5020 mAh',4,'xiaomi-redmi-9-(10).jpg','',NULL),(14,'Samsung Galaxy A31',10,5840000,'Super AMOLED, 6.4, 	Android 10, Full HD+, Chính 48 MP & Phụ 8 MP, 5 MP, 5 MP, Camera sau 20MP',1,'samsung-galaxy-a21s-055620-045627-400x460.png','',NULL),(15,'Phone SE 256GB 2020',10,17490000,'	IPS LCD, 4.7\", Retina, iOS 13, 	12 MP, 	Apple A13 Bionic 6 nhân, 3GB/256GB',2,'iphone-7-gold-400x460.png','',NULL),(16,'Vivo V19',10,8590000,'Super AMOLED, 6.4, Android 10, Full HD+, Chính 48 MP & Phụ 8 MP, 5 MP, 5 MP, Camera sau 20MP, 8 GB/128GB',3,'vivo-y30-xanh-400x460-400x460.png','',NULL),(17,'OPPO A92',10,6490000,'	TFT LCD, 6.5\", Full HD+, Android 10, Chính 48 MP & Phụ 8 MP, 2 MP, 2 MP, Snapdragon 665 8 nhân, 8 GB/128GB',5,'oppo-a92-tim-400x460-400x460.png','',NULL),(18,'Vsmart Star 4',10,2190000,'IPS LCD, 6.09, Android 10, Chính 8 MP & Phụ 5 MP, MediaTek Helio P35 8 nhân, 2 GB/32GB',6,'vsmart-star-4-den-400x460-400x460.png','',NULL),(19,'iPhone SE 64GB (2020)',10,12490000,'IPS LCD, 4.7, Retina, iOS 13, 12/7MP, Apple A13 Bionic 6 nhân, 3/64GB',2,'iphone-se-2020-do-400x460-400x460.png','',NULL);
 /*!40000 ALTER TABLE `phone` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -220,4 +220,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-07 11:54:30
+-- Dump completed on 2020-07-07 17:31:27

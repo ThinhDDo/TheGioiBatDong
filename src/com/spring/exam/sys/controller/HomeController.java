@@ -2,7 +2,6 @@ package com.spring.exam.sys.controller;
 
 import java.util.List;
 
-import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -10,6 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.spring.exam.sys.model.Manufacturer;
 import com.spring.exam.sys.model.Phone;
@@ -38,8 +38,21 @@ public class HomeController {
 	 * @return
 	 */
 	@GetMapping(value= {"/", "/index"})
-	public String profile(Model model, Authentication auth) {
-		User loginUser = (User) auth.getPrincipal();
+	public String index(Model model, Authentication auth) {
+		
+		UserInfo userProfile = null;
+		if(auth == null) {
+			logger.info("AUTH IS NULL");
+		} else {
+			if(auth.isAuthenticated()) {
+				User loginUser = (User) auth.getPrincipal();
+				userProfile = userService.selectUserByName(loginUser.getUsername());
+				logger.info("IS AUTHETICATED YEAHHHH!!!!!");			
+			}
+		}
+		
+		// Select Login user info
+		model.addAttribute("profile", userProfile);
 		
 		// Select All Brands
 		List<Manufacturer> brands = manufacturerService.selectManufacturers();
@@ -55,11 +68,15 @@ public class HomeController {
 		}
 		model.addAttribute("phones", phones);
 		
-		// Select Login user info
-		UserInfo userProfile = userService.selectUserByName(loginUser.getUsername());
-		model.addAttribute("profile", userProfile);
-		
 		return "index";
 	}
 	
+	@GetMapping(value="/filter")
+	public String filter(@RequestParam(name = "mid", required = false, defaultValue = "") String mid,
+						 Model model) {
+		
+		model.addAttribute("filter", phoneService.selectPhonesByManufacturer(mid));
+		return "index";
+	}
+
 }

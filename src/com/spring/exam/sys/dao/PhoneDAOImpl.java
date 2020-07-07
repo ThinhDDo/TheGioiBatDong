@@ -21,12 +21,12 @@ public class PhoneDAOImpl implements PhoneDAO {
 
 	@Override
 	public List<Phone> selectPhonesByManufacturer(String name) {
-		return sqlSession.selectOne("PhoneMapper.selectPhonesByManufacture", name);
+		return sqlSession.selectList("PhoneMapper.selectPhonesByManufacture", name);
 	}
 
 	@Override
 	public List<Phone> selectPhonesByPage(int page) {
-		return sqlSession.selectOne("PhoneMapper.selectPhonesByPage", page);
+		return sqlSession.selectList("PhoneMapper.selectPhonesByPage", page);
 	}
 
 }
