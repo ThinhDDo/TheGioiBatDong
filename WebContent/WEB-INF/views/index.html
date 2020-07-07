@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta charset="utf-8" />
+<title>Profile</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
+<link rel="stylesheet" href="css/index-style.css" th:href="@{/css/index-style.css}">
+<link rel="stylesheet" href="css/sidebar.css" th:href="@{/css/sidebar.css}">
+<link rel="shortcut icon" href="img/tgdd_titlebar.jpg" th:href="@{img/tgdd_titlebar.jpg}"/>
+</head>
+
+<body>
+
+	<div class="container">
+		<!-- NAVBAR COMPANY INFO -->
+		<nav class="navbar navbar-expand-sm bg-light">
+			<div class="left-nav d-flex justify-content-center" style="width: 20%;">
+				<i class="fa fa-envelope m-1" aria-hidden="true"></i>
+				<a href="#" class="nav-item-email">hello@Colorlib.com</a>
+			</div>
+
+			<div class="slash-seperate ml-2 mr-2">
+				|
+			</div>
+
+			<div class="center-nav d-flex justify-content-between" style="width: 60%;">
+				<div class="center-nav-left mt-1">
+					<a>Free shiping for all Order of $99</a>
+				</div>
+					
+				<div class="center-nav-right mt-1">
+					<a href="#" class="ic-social"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+					<a href="#" class="ic-social ml-1 mr-1"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+					<a href="#" class="ic-social ml-1 mr-1"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+					<a href="#" class="ic-social"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+				</div>
+			</div>
+
+			<div class="slash-seperate ml-2 mr-2">
+				|
+			</div>
+
+			<!-- Dropdown language options -->
+			<div class="right-nav-1 d-flex justify-content-center" style="width: 20%;">
+				<i class="fa fa-flag m-1" aria-hidden="true"></i>
+				<a href="#" class="nav-item-Language">Languages</a>
+			</div>
+
+			<div class="slash-seperate ml-2 mr-2">
+				|
+			</div>
+
+			<div class="right-nav-2 d-flex justify-content-center" style="width: 20%;">
+				
+				
+
+				<th:block th:if="${profile.username}==null">
+					<i class="fa fa-user m-1" aria-hidden="true"></i>
+					<a href="#">Login</a>
+				</th:block>
+
+				<th:block th:if="${profile.username}!=null">
+					<div class="dropdown">
+						<a data-toggle="dropdown" th:text="${profile.fullname}"></a>
+						<div class="dropdown-menu">
+						<a class="dropdown-item active" th:href="@{/profile(user=${profile.username})}">Your Profile</a>
+						<a class="dropdown-item" th:href="@{/login(logout=true)}">Logout</a>
+						</div>
+					</div>
+				</th:block>
+			</div>
+		</nav>
+		
+		<!-- WEBPAGES MENU -->
+		<nav class="navbar navbar-expand-sm p-4">
+			<div class="menu-left" style="width: 10%;">
+				<a class="navbar-brand d-flex justify-content-center" href="#">
+					<img th:src="@{/img/tgdd.png}" src="img/tgdd.png" alt="LOGO" style="width:200%;">
+				</a>
+			</div>
+
+			<div class="menu-center" style="width: 80%;">
+				<ul class="nav justify-content-center">
+					<li class="nav-item menu-center-item">
+						<a href="#" class="nav-link menu-center-link">SHOP</a>
+					</li>
+					<li class="nav-item menu-center-item ml-4 mr-4">
+						<a href="#" class="nav-link menu-center-link">PAGES</a>
+					</li>
+					<li class="nav-item menu-center-item ml-4 mr-4">
+						<a href="#" class="nav-link menu-center-link">BLOG</a>
+					</li>
+					<li class="nav-item menu-center-item">
+						<a href="#" class="nav-link menu-center-link">CONTACT</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="menu-right d-flex justify-content-between" style="width: 20%;">
+				
+				<ul class="nav">
+					<li class="nav-item">
+						<a href="#" class="nav-link nav-link-heart">
+							<i class="fa fa-heart fa-lg" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link nav-link-bag">
+							<i class="fa fa-shopping-bag fa-lg" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i>item: <b>$150.000</b></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- Price filter -->
+		<div class="container-fluid">
+
+			<div class="row filter p-3">
+				<div class="col-md-10">
+					<div class="filter-prices">
+						<label for="price-range">Price ranges: </label>
+						<a href="#">Below 2 milions</a>
+						<a href="#">From 2-4 milions</a>
+						<a href="#">From 4-7 milions</a>
+						<a href="#">From 7-13 milions</a>
+						<a href="#">Above 13 milions</a>
+						<input type="checkbox" value="New"> New
+					</div>
+				</div>
+
+				<div class="col-md-2">
+					<div class="sort text-right">
+						<span class="criteria">Sort: </span>
+						<label class="closefilter">
+							<i id="fa-sort" class="fa fa-sort-asc" aria-hidden="true"></i>
+						</label>
+						<div id="sort-list" style="display: none;">
+							<select class="form-control" id="sorting" name="selectSort">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>4</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-3">
+				<div class="sidebar filter">
+					<a class="active text-center" href="#">
+						<h4>BRANDS</h4>
+					</a>
+					
+					<th:block th:if="${brands} != null">
+						<a href="#" th:each="brand : ${brands}">
+							<img src="img/menu-brands/Samsung42.jpg" th:src="@{/img/menu-brands/{brandimg}(brandimg=${brand.image})}" th:alt="${brand.image}">
+						</a>
+					</th:block>
+				</div>
+			</div>
+
+			<div class="col-md-9">
+				<div class="content">
+
+					<!-- Search bar -->
+					<div class="container-fluid p-0">
+						<form class="my-2 my-lg-0">
+							<div class="input-group">
+								<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+								<button class="btn btn-warning my-2 my-sm-0 p-3" type="submit">Search</button>	
+							</div>
+						</form>
+					</div>
+					
+					<th:block th:if="${phones} != null">
+						<div class="row mt-3">
+							<div class="col-md-6" th:each="phone : ${phones}">
+								<div class="card" style="width: 18rem;">
+									<img class="card-img-top" th:src="@{/img/products/{phoneimg}(phoneimg=${phone.image})}" src="img/samsung.jpg" th:alt="${phone.image}">
+									<div class="card-body">
+									  <h5 class="card-title" th:text="${phone.name}">Card title</h5>
+									  <p class="card-text" th:text="${phone.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+									  <a href="#" class="btn btn-primary">Details</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</th:block>
+<!-- 					<div class="row mt-3"> -->
+						
+<!-- 						<div class="col-md-6"> -->
+<!-- 							<div class="card" style="width: 18rem;"> -->
+<!-- 								<img class="card-img-top" src="img/samsung.jpg" alt="Card image cap"> -->
+<!-- 								<div class="card-body"> -->
+<!-- 								  <h5 class="card-title">Card title</h5> -->
+<!-- 								  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+<!-- 								  <a href="#" class="btn btn-primary">Details</a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+
+<!-- 						<div class="col-md-6"> -->
+<!-- 							<div class="card" style="width: 18rem;"> -->
+<!-- 								<img class="card-img-top" src="img/samsung.jpg" alt="Card image cap"> -->
+<!-- 								<div class="card-body"> -->
+<!-- 								  <h5 class="card-title">Card title</h5> -->
+<!-- 								  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+<!-- 								  <a href="#" class="btn btn-primary">Details</a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+
+<!-- 					<div class="row mt-3"> -->
+<!-- 						<div class="col-md-6"> -->
+<!-- 							<div class="card" style="width: 18rem;"> -->
+<!-- 								<img class="card-img-top" src="img/samsung.jpg" alt="Card image cap"> -->
+<!-- 								<div class="card-body"> -->
+<!-- 								  <h5 class="card-title">Card title</h5> -->
+<!-- 								  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+<!-- 								  <a href="#" class="btn btn-primary">Details</a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+						
+<!-- 						<div class="col-md-6"> -->
+<!-- 							<div class="card" style="width: 18rem;"> -->
+<!-- 								<img class="card-img-top" src="img/samsung.jpg" alt="Card image cap"> -->
+<!-- 								<div class="card-body"> -->
+<!-- 								  <h5 class="card-title">Card title</h5> -->
+<!-- 								  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+<!-- 								  <a href="#" class="btn btn-primary">Details</a> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+
+					<!-- Page Navigation -->
+					<nav aria-label="...">
+					  <ul class="pagination pagination-sm">
+					    <li class="page-item disabled">
+					      <a class="page-link" href="#" tabindex="-1">1</a>
+					    </li>
+					    <li class="page-item"><a class="page-link" href="#">2</a></li>
+					    <li class="page-item"><a class="page-link" href="#">3</a></li>
+					  </ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<!-- <nav class="navbar navbar-expand-sm">
+		<div class="option-left d-flex justify-content-end">
+			<div class="dropdown">
+				<button type="button" class="btn btn-success dropdown-toggle p-3" data-toggle="dropdown">
+				All Deparments
+				</button>
+				<div class="dropdown-menu">
+				<a class="dropdown-item" href="#">Executive</a>
+				<a class="dropdown-item" href="#">HR</a>
+				<a class="dropdown-item" href="#">Developer</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="option-center" style="width: 70%;">
+			<div class="container">
+				<form class="my-2 my-lg-0">
+					<div class="input-group">
+						<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-success my-2 my-sm-0 p-3" type="submit">Search</button>	
+					</div>
+				</form>
+			</div>
+		</div>
+		
+		<div class="option-right d-flex justify-content-center" style="width: 20%;">
+			<ul class="nav flex-column">
+				<li class="nav-item">
+					<h4>+65.199.9999</h4>
+					<i>Support 24/7 time</i>
+				</li>
+			</ul>
+		</div>
+	</nav> -->
+
+	
+	<!-- <div class="container-front-img" style="width:100%; height:40%;">
+		<img src="img/front-image.jpg" alt="Front image" style="width:100%; height:400px;">
+	</div> -->
+	
+	<!-- CONTACT INFORMATION -->
+	<!-- <style>
+		img.contact-img {
+			width: 150px;
+			height: auto;
+		}
+	</style>
+	<div class="container mt-5 mb-5">
+		<div class="row text-center">
+			<div class="col-md-3">
+				<img src="img/mail.png" alt="icon" class="contact-img">
+			</div>
+			<div class="col-md-3">
+			<img src="img/mail.png" alt="icon" class="contact-img">
+			</div>
+			<div class="col-md-3">
+			<img src="img/mail.png" alt="icon" class="contact-img">
+			</div>
+			<div class="col-md-3">
+			<img src="img/mail.png" alt="icon" class="contact-img">
+			</div>
+		</div>
+		<div class="row text-center">
+			<div class="col-md-3"><h4>info</h4></div>
+			<div class="col-md-3"><h4>info</h4></div>
+			<div class="col-md-3"><h4>info</h4></div>
+			<div class="col-md-3"><h4>info</h4></div>
+		</div>
+		<div class="row text-center">
+			<div class="col-md-3">info</div>
+			<div class="col-md-3">info</div>
+			<div class="col-md-3">info</div>
+			<div class="col-md-3">info</div>
+		</div>
+	</div> -->
+
+
+	<!-- JAVASCRIPT SOURCE -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script src="js/sort.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PhoneMapper">
+	
+	<select id="selectPhones" resultType="Phone">
+		SELECT * FROM phone
+	</select>
+	
+	<select id="selectPhonesByPage" resultType="Phone">
+		SELECT * FROM phone limit 4 offset #{page}
+	</select>
+	
+	<select id="selectPhonesByManufacture" resultType="Phone">
+		SELECT * FROM phone where manufacture_id = #{manufacture_id}
+	</select>
+</mapper>
