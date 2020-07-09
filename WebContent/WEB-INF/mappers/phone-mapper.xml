@@ -13,6 +13,6 @@
 	</select>
 	
 	<select id="selectPhonesByManufacture" resultType="Phone">
-		SELECT * FROM phone where manufacture_id = #{manufacture_id}
+		SELECT * FROM phone where manufacturer_id = #{manufacturer_id}
 	</select>
 </mapper>

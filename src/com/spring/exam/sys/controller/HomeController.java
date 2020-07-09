@@ -9,7 +9,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.spring.exam.sys.model.Manufacturer;
 import com.spring.exam.sys.model.Phone;
@@ -38,21 +42,25 @@ public class HomeController {
 	 * @return
 	 */
 	@GetMapping(value= {"/", "/index"})
-	public String index(Model model, Authentication auth) {
+	public String index(Model model, 
+						Authentication auth,
+						@ModelAttribute("mid") String filter) {
 		
-		UserInfo userProfile = null;
-		if(auth == null) {
-			logger.info("AUTH IS NULL");
-		} else {
-			if(auth.isAuthenticated()) {
-				User loginUser = (User) auth.getPrincipal();
-				userProfile = userService.selectUserByName(loginUser.getUsername());
-				logger.info("IS AUTHETICATED YEAHHHH!!!!!");			
-			}
-		}
+//		UserInfo userProfile = null;
+//		if(auth == null) {
+//			logger.info("AUTH IS NULL");
+//		}
+//		// Select Login user info
+//		else {
+//			if(auth.isAuthenticated()) {
+//				User loginUser = (User) auth.getPrincipal();
+//				userProfile = userService.selectUserByName(loginUser.getUsername());
+//				logger.info("IS AUTHETICATED YEAHHHH!!!!!");			
+//			}
+//		}
+//		model.addAttribute("profile", userProfile);s
 		
-		// Select Login user info
-		model.addAttribute("profile", userProfile);
+		
 		
 		// Select All Brands
 		List<Manufacturer> brands = manufacturerService.selectManufacturers();
@@ -62,21 +70,30 @@ public class HomeController {
 		model.addAttribute("brands", brands);
 		
 		// Select All Phones
-		List<Phone> phones = phoneService.selectPhones();
-		for(Phone phone : phones) {
-			logger.info("PHONE NAME: " + phone.toString() + "\n");
+		List<Phone> phones = null;
+		if(filter.equals("")) {
+			phones = phoneService.selectPhones();
+			for(Phone phone : phones) {
+				logger.info("PHONE NAME: " + phone.toString() + "\n");
+			}
+			model.addAttribute("phones", phones);
+		} else {
+			phones = phoneService.selectPhonesByManufacturer(filter);
+			for(Phone phone : phones) {
+				logger.info("PHONE NAME: " + phone.toString() + "\n");
+			}
+			model.addAttribute("phones", phones);
 		}
-		model.addAttribute("phones", phones);
 		
 		return "index";
 	}
 	
 	@GetMapping(value="/filter")
-	public String filter(@RequestParam(name = "mid", required = false, defaultValue = "") String mid,
-						 Model model) {
+	public RedirectView filter(@RequestParam(name = "mid", required = false, defaultValue = "") String mid,
+						 RedirectAttributes redirectAttributes) {
 		
-		model.addAttribute("filter", phoneService.selectPhonesByManufacturer(mid));
-		return "index";
+		redirectAttributes.addAttribute("mid", mid);	
+		
+		return new RedirectView("index");
 	}
-
 }

@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+	
     $(".criteria").click(function() {
 
         if($("#sort-list").is(":visible")) {

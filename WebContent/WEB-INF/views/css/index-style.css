@@ -79,3 +79,36 @@ div.sort-item {
 .fa-sort-asc, .fa-sort-desc {
 	color: #288ad6;
 }
+
+/*
+	PRODUCT CARD
+*/
+div.product {
+	margin: 0 10px;
+	width: 25rem;
+}
+
+div.card-header {
+	background-color: white;
+	border-bottom: none;
+	min-height: 50px;
+	padding: 0;
+}
+
+div.my-card-footer {
+	display: inline-block;
+	padding: 0;
+}
+
+div.my-card-body {
+	padding-left: 0;
+	padding-right: 5px;
+}
+
+img.my-card-img {
+	height: 250px;
+}
+
+b#price {
+	color: red;
+}

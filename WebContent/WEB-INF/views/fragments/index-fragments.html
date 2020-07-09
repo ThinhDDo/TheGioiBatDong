@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+</head>
+<body>
+	<!-- INDEX HEADER -->
+	<th:block th:fragment="header">
+		<div class="header">
+			<!-- NAVBAR COMPANY INFO -->
+			<nav class="navbar navbar-expand-sm">
+				<div class="left-nav d-flex justify-content-center" style="width: 20%;">
+					<i class="fa fa-envelope m-1" aria-hidden="true"></i>
+					<a href="#" class="nav-item-email">hello@Colorlib.com</a>
+				</div>
+	
+				<div class="slash-seperate ml-2 mr-2">
+					|
+				</div>
+	
+				<div class="center-nav d-flex justify-content-between" style="width: 60%;">
+					<div class="center-nav-left mt-1">
+						<a>Free shiping for all Order of $99</a>
+					</div>
+						
+					<div class="center-nav-right mt-1">
+						<a href="#" class="ic-social"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+						<a href="#" class="ic-social ml-1 mr-1"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+						<a href="#" class="ic-social ml-1 mr-1"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+						<a href="#" class="ic-social"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a>
+					</div>
+				</div>
+	
+				<div class="slash-seperate ml-2 mr-2">
+					|
+				</div>
+	
+				<!-- Dropdown language options -->
+				<div class="right-nav-1 d-flex justify-content-center" style="width: 20%;">
+					<i class="fa fa-flag m-1" aria-hidden="true"></i>
+					<a href="#" class="nav-item-Language">Languages</a>
+				</div>
+	
+				<div class="slash-seperate ml-2 mr-2">
+					|
+				</div>
+	
+				<div class="right-nav-2 d-flex justify-content-center" style="width: 20%;">
+					
+					
+	
+					<th:block th:if="${#authorization.expression('!isAuthenticated()')}">
+						<i class="fa fa-user m-1" aria-hidden="true"></i>
+						<a href="#" th:href="@{/login}">Login</a>
+					</th:block>
+	
+					<th:block th:if="${#authorization.expression('isAuthenticated()')}">
+						<div class="dropdown">
+							<a data-toggle="dropdown" th:text="${#authentication.name}"></a>
+							<div class="dropdown-menu">
+							<a class="dropdown-item active" th:href="@{/profile(user=${#authentication.name})}">Your Profile</a>
+							<a class="dropdown-item" th:href="@{/logout}">Logout</a>
+							</div>
+						</div>
+					</th:block>
+				</div>
+			</nav>
+		</div>
+		
+		<!-- WEBPAGES MENU -->
+		<nav class="navbar navbar-expand-sm p-4">
+			<div class="menu-left" style="width: 10%;">
+				<a class="navbar-brand d-flex justify-content-center" href="#">
+					<img th:src="@{/img/tgdd.png}" src="img/tgdd.png" alt="LOGO" style="width:200%;">
+				</a>
+			</div>
+
+			<div class="menu-center" style="width: 80%;">
+				<ul class="nav justify-content-center">
+					<li class="nav-item menu-center-item">
+						<a href="#" class="nav-link menu-center-link">SHOP</a>
+					</li>
+					<li class="nav-item menu-center-item ml-4 mr-4">
+						<a href="#" class="nav-link menu-center-link">PAGES</a>
+					</li>
+					<li class="nav-item menu-center-item ml-4 mr-4">
+						<a href="#" class="nav-link menu-center-link">BLOG</a>
+					</li>
+					<li class="nav-item menu-center-item">
+						<a href="#" class="nav-link menu-center-link">CONTACT</a>
+					</li>
+				</ul>
+			</div>
+			
+			<div class="menu-right d-flex justify-content-between" style="width: 20%;">
+				
+				<ul class="nav">
+					<li class="nav-item">
+						<a href="#" class="nav-link nav-link-heart">
+							<i class="fa fa-heart fa-lg" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link nav-link-bag">
+							<i class="fa fa-shopping-bag fa-lg" aria-hidden="true"></i>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="#" class="nav-link">
+							<i>item: <b>$150.000</b></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</th:block>
+	
+	<!-- INDEX FOOTER -->
+	<th:block th:fragment="footer">
+		<!-- Footer -->
+		<footer class="page-footer font-small blue pt-4">
+
+			<!-- Footer Links -->
+			<div class="container-fluid text-center text-md-left">
+
+				<!-- Grid row -->
+				<div class="row">
+
+					<!-- Grid column -->
+					<div class="col-md-6 mt-md-0 mt-3">
+
+						<!-- Content -->
+						<h5 class="text-uppercase">Footer Content</h5>
+						<p>Here you can use rows and columns to organize your footer
+							content.</p>
+
+					</div>
+					<!-- Grid column -->
+
+					<hr class="clearfix w-100 d-md-none pb-3">
+
+					<!-- Grid column -->
+					<div class="col-md-3 mb-md-0 mb-3">
+
+						<!-- Links -->
+						<h5 class="text-uppercase">Links</h5>
+
+						<ul class="list-unstyled">
+							<li><a href="#!">Link 1</a></li>
+							<li><a href="#!">Link 2</a></li>
+							<li><a href="#!">Link 3</a></li>
+							<li><a href="#!">Link 4</a></li>
+						</ul>
+
+					</div>
+					<!-- Grid column -->
+
+					<!-- Grid column -->
+					<div class="col-md-3 mb-md-0 mb-3">
+
+						<!-- Links -->
+						<h5 class="text-uppercase">Links</h5>
+
+						<ul class="list-unstyled">
+							<li><a href="#!">Link 1</a></li>
+							<li><a href="#!">Link 2</a></li>
+							<li><a href="#!">Link 3</a></li>
+							<li><a href="#!">Link 4</a></li>
+						</ul>
+
+					</div>
+					<!-- Grid column -->
+
+				</div>
+				<!-- Grid row -->
+
+			</div>
+			<!-- Footer Links -->
+
+			<!-- Copyright -->
+			<div class="footer-copyright text-center py-3">
+				� 2020 Copyright: <a href="https://mdbootstrap.com/">
+					MDBootstrap.com</a>
+			</div>
+			<!-- Copyright -->
+
+		</footer>
+		<!-- Footer -->
+	</th:block>
+	
+</body>
+</html>

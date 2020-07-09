@@ -38,7 +38,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// Grant access to specific url (Mapping path ->> role)
+		
+		http.sessionManagement().maximumSessions(1000).expiredUrl("/login");
+		
 		http.authorizeRequests()
 			.antMatchers("/login").permitAll()
 			.antMatchers("/css/**").permitAll()
@@ -60,8 +62,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.permitAll()
 		.and()
 			.logout()
-			.logoutUrl("/login?logout=true")
-			.logoutSuccessUrl("/login")
+			.logoutSuccessUrl("/login?logout=true")
+			// .logoutUrl("/login?logout=true")
+			// .logoutSuccessUrl("/login")
+			.invalidateHttpSession(true)
+			.deleteCookies("JSESSIONID")
 			.permitAll()
 		.and()
 			.csrf()
